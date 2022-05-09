@@ -20,11 +20,17 @@
                                 <rect key="frame" x="48" y="80" width="224" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="5GE-Js-qU8"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="psX-Th-brf">
                                 <rect key="frame" x="48" y="142" width="224" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="lo8-la-wHW"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qq7-tD-Aof">
                                 <rect key="frame" x="126" y="204" width="68.5" height="33.5"/>
@@ -33,7 +39,8 @@
                                     <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="Fwu-BY-AB0" kind="presentation" id="WRN-Cs-en4"/>
+                                    <action selector="logInPressed" destination="BYZ-38-t0r" eventType="touchUpInside" id="sDv-K5-ZU8"/>
+                                    <segue destination="Fwu-BY-AB0" kind="presentation" identifier="showWelcomeVC" modalPresentationStyle="fullScreen" id="WRN-Cs-en4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wX3-JN-JUq">

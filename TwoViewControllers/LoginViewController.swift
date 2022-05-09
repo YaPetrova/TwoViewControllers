@@ -12,30 +12,31 @@ class LoginViewController: UIViewController {
     @IBOutlet var userNameTF: UITextField!
     @IBOutlet var passwordTF: UITextField!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    private let name = "Hacker"
+    private let password = "qwe123"
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let welcomeVC = segue.destination as? WelcomeViewController, userNameTF.text == "Hacker" && passwordTF.text == "qwe123" else {
-            showAlert(with: "Access denied", and: "Hacking into the system is prevented")
-            return
-        }
-        
-        welcomeVC.welcome = userNameTF.text
+        guard let welcomeVC = segue.destination as? WelcomeViewController else {return}
+        welcomeVC.welcome = name
     }
         
-    @IBAction func unwind(for segue: UIStoryboardSegue) {
-        userNameTF.text = ""
-        passwordTF.text = ""
+    @IBAction func logInPressed() {
+        if userNameTF.text != name || passwordTF.text != password {
+            showAlert(with: "Access denied", and: "Hacking into the system is prevented")
+        }
     }
     
     @IBAction func userNameReminder(_ sender: Any) {
-        showAlert(with: "Super secret information", and: "User Name: Hacker")
+        showAlert(with: "Super secret information", and: "User Name: \(name)")
     }
     
     @IBAction func passwordReminder(_ sender: Any) {
-        showAlert(with: "Super secret information", and: "Password: qwe123")
+        showAlert(with: "Super secret information", and: "Password: \(password)")
+    }
+    
+    @IBAction func unwind(for segue: UIStoryboardSegue) {
+        userNameTF.text = ""
+        passwordTF.text = ""
     }
 }
 
@@ -50,6 +51,25 @@ extension LoginViewController {
         
         alert.addAction(okAction)
         present(alert, animated: true)
+    }
+}
+
+// MARK: - UITextFieldDelegate
+
+extension LoginViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == userNameTF {
+            passwordTF.becomeFirstResponder()
+        } else {
+            logInPressed()
+            performSegue(withIdentifier: "showWelcomeVC", sender: nil)
+        }
+        return true
     }
 }
 
